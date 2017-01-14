@@ -8,7 +8,7 @@ package hard
 
 坑：
 f函数的第二个参数一定要传切片的指针，否则会发生切片找不到的效果
- */
+*/
 
 type TreeNode struct {
 	Val   int
