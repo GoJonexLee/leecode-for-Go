@@ -14,8 +14,8 @@ func singleNumber(nums []int) int {
 		one ^= num
 
 		three ^= one & two
-		one &= ~three
-		two &= ~three
+		one &= ^three
+		two &= ^three
 	}
 	return one
 }
