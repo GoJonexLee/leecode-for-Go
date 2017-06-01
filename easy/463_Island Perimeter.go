@@ -1,11 +1,5 @@
 package easy
 
-import "fmt"
-
-/*
-
- */
-
 func islandPerimeter(grid [][]int) int {
 	re, rows, cols := 0, len(grid), len(grid[0])
 
@@ -44,11 +38,9 @@ func islandPerimeter(grid [][]int) int {
 
 	for i, _ := range grid {
 		for j, _ := range grid[i] {
-			fmt.Print(fc(i,j), " ")
 			re += fc(i, j)
 		}
-		fmt.Println()
 	}
-	return re
 
+	return re
 }
