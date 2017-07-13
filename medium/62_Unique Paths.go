@@ -16,16 +16,12 @@ func uniquePaths(m int, n int) int {
 		return 1
 	}
 
-	cul := make(map[int][]int, 2)
-	cul[0], cul[1] = initArray(n, 1), initArray(n, 1)
-
-	var step, up int
+	re := initArray(n, 1)
 	for i := 1; i < m; i++ {
 		for j := 1; j < n; j++ {
-			step, up = i % 2, (i + 1) % 2
-			cul[step][j] = cul[step][j-1] + cul[up][j]
+			re[j] = re[j-1] + re[j]
 		}
 	}
 
-	return cul[step][n-1]
+	return re[n-1]
 }
