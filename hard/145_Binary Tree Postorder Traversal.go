@@ -18,23 +18,18 @@ type TreeNode struct {
 
 func postorderTraversal(root *TreeNode) []int {
 
-	var f func(*TreeNode, *[]int)
-	f = func(rt *TreeNode, rl *[]int) {
-		if rt == nil {
+	result := []int{}
+
+	var dp func(treeNode *TreeNode)
+
+	dp = func(root *TreeNode) {
+		if root == nil {
 			return
 		}
-
-		if rt.Left == nil && rt.Right == nil {
-			*rl = append(*rl, rt.Val)
-			return
-		}
-
-		f(rt.Left, rl)
-		f(rt.Right, rl)
-		*rl = append(*rl, rt.Val)
+		dp(root.Left)
+		dp(root.Right)
+		result = append(result, root.Val)
 	}
-
-	re := []int{}
-	f(root, &re)
-	return re
+	dp(root)
+	return result
 }

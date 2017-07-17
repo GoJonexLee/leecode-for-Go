@@ -15,16 +15,16 @@ type TreeNode struct {
 func inorderTraversal(root *TreeNode) []int {
 	re := []int{}
 
-	var f func(*TreeNode, *[]int)
-	f = func(root *TreeNode, re *[]int) {
+	var f func(*TreeNode)
+	f = func(root *TreeNode) {
 		if root == nil {
 			return
 		}
-		f(root.Left, re)
-		*re = append(*re, root.Val)
-		f(root.Right, re)
+		f(root.Left)
+		re = append(re, root.Val)
+		f(root.Right)
 	}
 
-	f(root, &re)
+	f(root)
 	return re
 }
