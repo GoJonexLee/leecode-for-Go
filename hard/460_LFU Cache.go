@@ -1,8 +1,7 @@
-package main
+package head
 
 import (
 	"container/list"
-	"fmt"
 )
 
 type LFUCache struct {
@@ -42,8 +41,8 @@ func (this *LFUCache) Get(key int) int {
 	this.kvCount[key] = freq + 1
 	this.keyIdx[key] = newE
 
-	if this.freqKeys[freq].Len() == 0 {
-		this.minFreq = freq + 1
+	if this.freqKeys[this.minFreq].Len() == 0 {
+		this.minFreq++
 	}
 
 	nd := e.(node)
@@ -57,10 +56,7 @@ func (this *LFUCache) Put(key int, value int) {
 	}
 
 	if this.Get(key) != -1 {
-		freq, idx := this.kvCount[key], this.keyIdx[key]
-		this.freqKeys[freq].Remove(idx)
-		e := this.freqKeys[freq].PushFront(node{key, value})
-		this.keyIdx[key] = e
+		this.keyIdx[key].Value = node{key, value}
 		return
 	}
 
@@ -79,23 +75,4 @@ func (this *LFUCache) Put(key int, value int) {
 	this.kvCount[key] = this.minFreq
 	newNode := this.freqKeys[this.minFreq].PushFront(node{key, value})
 	this.keyIdx[key] = newNode
-}
-
-func main() {
-	cache := Constructor1(2)
-	cache.Put(1, 1)
-	cache.Put(2, 2)
-
-	fmt.Println(cache.Get(1))
-	cache.Put(3, 3)
-	fmt.Println(cache.Get(2))
-	fmt.Println(cache.Get(3))
-
-	cache.Put(4, 4)
-	fmt.Println(cache.Get(1))
-	fmt.Println(cache.Get(3))
-	fmt.Println(cache.Get(4))
-
-	cache.Put(2, 1)
-	fmt.Println(cache.Get(2))
 }
