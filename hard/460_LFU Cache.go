@@ -16,7 +16,7 @@ type node struct {
 	k, v int
 }
 
-func Constructor1(capacity int) LFUCache {
+func Constructor(capacity int) LFUCache {
 	return LFUCache{
 		kvCount:  make(map[int]int),
 		freqKeys: make(map[int]*list.List),
