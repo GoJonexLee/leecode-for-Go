@@ -1,0 +1,3 @@
+select max(Salary) as SecondHighestSalary from Employee E1 where 1 = (select COUNT(DISTINCT(E2.Salary)) from Employee E2 where E2.Salary > E1.Salary);
+select max(Salary) as SecondHighestSalary from Employee where Salary not in (select max(Salary) from Employee);
+select Salary as SecondHighestSalary from Employee group by Salary union all (select null as Salary) order by SecondHighestSalary desc limit 1 offset 1;
