@@ -1,0 +1,3 @@
+select d.Name Department, e1.Name Employee, e1.Salary from Employee e1 join Department d on e1.DepartmentId = d.Id where Salary in (select max(Salary) from Employee e2 where e1.DepartmentId = e2.DepartmentId);
+select d.Name Department, e.Name Employee, e.Salary from Employee e, Department d where e.DepartmentId = d.Id and e.Salary = (select max(Salary) from Employee e2 where e2.DepartmentId = d.Id);
+select d.name Department, e.Name Employee, e.Salary from Employee e, Department d where e.DepartmentId = d.Id and e.Salary >= ALl (select Salary from Employee e2 where e.DepartmentId = d.Id);

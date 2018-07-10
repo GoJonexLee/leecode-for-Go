@@ -1,0 +1,1 @@
+update salary set set=if(sex='f','m','f');

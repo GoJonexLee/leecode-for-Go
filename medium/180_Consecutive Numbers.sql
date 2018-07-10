@@ -1,0 +1,3 @@
+select distinct l1.Num ConsecutiveNums from Logs l1 join Logs l2 on l1.Id = l2.Id -1 join Logs l3 on l1.Id = l3.Id-2 where l1.Num = l2.Num and l2.Num = l3.Num;
+select distinct l1.Num ConsecutiveNums from Logs l1, Logs l2, Logs l3 where l1.Id = l2.Id-1 and l2.Id = l3.Id-1 and l1.Num = l2.Num and l2.Num = l3.Num;
+select distinct Num ConsecutiveNums from (select Num, @count := IF(@pre = Num, @count + 1, 1) as n, @pre := Num from Logs, (select @count := 0, @pre := -1)) as t where t.n >= 3;
